@@ -1,10 +1,12 @@
 package game;
 
+
 import gamesframework.Objects;
 import gamesframework.SoundPlayer;
 
 import java.awt.*;
 import java.io.File;
+
 
 public class Bird extends Objects {
 
@@ -16,11 +18,12 @@ public class Bird extends Objects {
 
     private boolean isLive = true;
 
+
     public SoundPlayer flySound, fallSound, getpointSound;
 
     public Bird(int x, int y, int w, int h) {
-        super(x,y,w,h);
-        rect = new Rectangle(x,y,w,h); // Lấy toạ độ của con chim như cách lấy toạ độ của mặt đất
+        super(x, y, w, h);
+        rect = new Rectangle(x, y, w, h); // Lấy toạ độ của con chim như cách lấy toạ độ của mặt đất
 
         flySound = new SoundPlayer(new File("Assets/fap.wav")); // tiếng chim lúc bay
         fallSound = new SoundPlayer(new File("Assets/fall.wav")); // tiếng chim lúc chạm cột hoặc rơi xuống đất
@@ -30,6 +33,7 @@ public class Bird extends Objects {
     public void setLive(boolean b) {
         isLive = b;
     }
+
     public boolean getLive() {
         return isLive;
     }
@@ -48,8 +52,8 @@ public class Bird extends Objects {
          * vận tốc theo trục Oy được biểu diễn bằng Gravity
          */
         vt += FlappyBird.Gravity; //
-        this.setPosY(this.getPosY()+vt);
-        this.rect.setLocation((int)this.getPosX(),(int) this.getPosY());
+        this.setPosY(this.getPosY() + vt);
+        this.rect.setLocation((int) this.getPosX(), (int) this.getPosY());
 
         if (vt < 0) {
             isFlying = true;

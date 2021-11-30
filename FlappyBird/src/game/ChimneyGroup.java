@@ -49,7 +49,7 @@ public class ChimneyGroup {
         }
     }
 
-    public void resetChimneys(){
+    public void UpdateChimneys(){
 
         chimneys = new QueueList<>();
 

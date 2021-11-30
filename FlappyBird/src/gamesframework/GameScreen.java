@@ -27,13 +27,17 @@ public abstract class GameScreen extends JFrame implements KeyListener{
         this.CUSTOM_HEIGHT = h;
         MASTER_WIDTH = CUSTOM_WIDTH;
         MASTER_HEIGHT = CUSTOM_HEIGHT;
+        /**
+         * Toolkit trong Java AWT dùng để lấy độ phân giải màn hình.
+         * Bằng việc lấy được độ phần giải màn hình em có thể căn chỉnh
+         * sao cho phần chơi game ở chính giữa của khung hình.
+         */
         Toolkit toolkit = this.getToolkit();
         Dimension dimension = toolkit.getScreenSize();
         this.setBounds((dimension.width - CUSTOM_WIDTH)/2,(dimension.height-CUSTOM_HEIGHT)/2,CUSTOM_WIDTH,CUSTOM_HEIGHT);
         InitThread();
         InitScreen();
     }
-
 
     private void InitScreen(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // đóng trò chơi bằng cách bấm nút X
@@ -57,7 +61,9 @@ public abstract class GameScreen extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        KEY_ACTION(e, GameScreen.KEY_PRESSED);
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            KEY_ACTION(e, GameScreen.KEY_PRESSED);
+        }
     }
 
     @Override

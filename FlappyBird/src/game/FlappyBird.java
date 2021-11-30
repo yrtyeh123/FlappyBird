@@ -42,14 +42,12 @@ public class FlappyBird extends GameScreen {
 
     public FlappyBird() {
         super(800,600);
-
         try {
             birds = ImageIO.read(new File("Assets/bird_sprite.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         bird_anim = new Animation(70); // milis
 
         AFrameOnImage f;
@@ -88,7 +86,7 @@ public class FlappyBird extends GameScreen {
         bird.setVt(0);
         bird.setLive(true);
         SCORE = 0;
-        chimneyGroup.resetChimneys();
+        chimneyGroup.UpdateChimneys();
     }
 
     @Override
@@ -137,8 +135,6 @@ public class FlappyBird extends GameScreen {
 
     @Override
     public void GAME_PAINT(Graphics2D g2) {
-
-        //g2.setColor(Color.decode("#b8daef")); //  bảng màu nền
 
         /**
          * ta xét tô màu toàn màn hình.
