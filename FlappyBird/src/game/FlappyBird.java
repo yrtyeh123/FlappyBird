@@ -167,6 +167,7 @@ public class FlappyBird extends GameScreen {
                 e.printStackTrace();
             }
             g2.drawImage(beginImage, 0,100,null);
+            g2.setFont(new Font("Arial", 1, 25));
             g2.setColor(Color.BLACK);
             g2.drawString("SPACE TO PLAY GAME",250,350);
         }
