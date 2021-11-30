@@ -18,14 +18,7 @@ public class AFrameOnImage {
         DimsBounds[2] = w;
         DimsBounds[3] = h;
     }
-    public void VisibleRectDebug(boolean enable){
-        enablePaintRect = enable;
-    }
-    public int[] GetBounds(){
-        return DimsBounds;
-    }
     public void Paint(int x, int y, BufferedImage image, Graphics2D g2, int anchor, float rotation){
-        
 
         BufferedImage imageDraw = image.getSubimage(DimsBounds[0], DimsBounds[1], DimsBounds[2], DimsBounds[3]);
         

@@ -7,15 +7,15 @@ import javax.swing.JFrame;
 
 public abstract class GameScreen extends JFrame implements KeyListener{
 
-    public static int KEY_PRESSED = 0;
-    public static int KEY_RELEASED = 1;
+    public static int KEY_PRESSED = 1;
+    public static int KEY_RELEASED = 0;
     
     public int CUSTOM_WIDTH  = 500;
     public int CUSTOM_HEIGHT = 500;
     
     private GameThread G_Thread;
 
-    public static int MASTER_WIDTH = 1000, MASTER_HEIGHT = 800;
+    public static int MASTER_WIDTH = 500, MASTER_HEIGHT = 500;
     
     public GameScreen(){
         InitThread();
@@ -36,9 +36,9 @@ public abstract class GameScreen extends JFrame implements KeyListener{
 
 
     private void InitScreen(){
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // đóng trò chơi bằng cách bấm nút X
         this.addKeyListener(this);
-        setSize(CUSTOM_WIDTH, CUSTOM_HEIGHT);
+        setSize(CUSTOM_WIDTH, CUSTOM_HEIGHT); // lấy kích thước của game = CUSTOM_WIDTH VÀ CUSTOM_HEIGHT
         setVisible(true);
         
     }

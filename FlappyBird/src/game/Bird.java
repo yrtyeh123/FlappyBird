@@ -20,11 +20,11 @@ public class Bird extends Objects {
 
     public Bird(int x, int y, int w, int h) {
         super(x,y,w,h);
-        rect = new Rectangle(x,y,w,h);
+        rect = new Rectangle(x,y,w,h); // Lấy toạ độ của con chim như cách lấy toạ độ của mặt đất
 
-        flySound = new SoundPlayer(new File("Assets/fap.wav"));
-        fallSound = new SoundPlayer(new File("Assets/fall.wav"));
-        getpointSound = new SoundPlayer(new File("Assets/getpoint.wav"));
+        flySound = new SoundPlayer(new File("Assets/fap.wav")); // tiếng chim lúc bay
+        fallSound = new SoundPlayer(new File("Assets/fall.wav")); // tiếng chim lúc chạm cột hoặc rơi xuống đất
+        getpointSound = new SoundPlayer(new File("Assets/getpoint.wav")); // tiếng kêu mỗi khi ghi được thêm điểm số
     }
 
     public void setLive(boolean b) {
@@ -43,8 +43,11 @@ public class Bird extends Objects {
     }
 
     public void update(long deltaTime) {
-
-        vt += FlappyBird.Gravity;
+        /**
+         * ngoài vận tốc mặc định khi bay chim còn chịu trọng lực G của Trái Đất nên:
+         * vận tốc theo trục Oy được biểu diễn bằng Gravity
+         */
+        vt += FlappyBird.Gravity; //
         this.setPosY(this.getPosY()+vt);
         this.rect.setLocation((int)this.getPosX(),(int) this.getPosY());
 
@@ -55,7 +58,7 @@ public class Bird extends Objects {
     }
 
     public void fly() {
-        vt = -3;
+        vt = -3; //  vận tốc theo trục hoành của con chim.
         flySound.play();
     }
 

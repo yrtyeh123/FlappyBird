@@ -1,7 +1,6 @@
 package game;
 
 import gamesframework.QueueList;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,8 +16,16 @@ public class ChimneyGroup {
 
     public static int SIZE = 6;
 
-    private int topChimneyY = -300;
-    private int bottomChimneyY = 225;
+    /**
+     * Vì theo lý thuyết ta vẽ từ trên xuống dưới từ trái qua phải(tức trục tung y dương hướng xuống dưới)
+     * nên khi vẽ hình ta tuân thủ 2 chú ý :
+     *  1; Vẽ hình ống ngược : tung độ vẽ ông ngược + min của deltaY(= 0) + 400 > 0
+     *  2. Vẽ hình xuôi: tung độ vẽ ống ngược + max của deltaY(=300) < 500
+     *  (vì độ cao màn hình 625 đã mất 125 đơn vị để vẽ animation cho mặt đất) nếu vượt 500 thì có thể ko thấy ống)
+     */
+
+    private int topChimneyY = -350;
+    private int bottomChimneyY = 180;
 
     public Chimney getChimney(int i) {
         return chimneys.get(i);
@@ -29,7 +36,7 @@ public class ChimneyGroup {
         int a;
         a = random.nextInt(10);
 
-        return a*35;
+        return a*30;
     }
 
     public ChimneyGroup() {
@@ -40,24 +47,17 @@ public class ChimneyGroup {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        chimneys = new QueueList<>();
-
-        Chimney cn;
-
-        for (int i = 0; i < SIZE/2; i++) {
-            int deltaY = getRandomY();
-            cn = new Chimney(830 + i * 300, bottomChimneyY + deltaY, 74, 400);
-            chimneys.push(cn);
-
-            cn = new Chimney(830 + i * 300, topChimneyY + deltaY, 74, 400);
-            chimneys.push(cn);
-        }
     }
 
     public void resetChimneys(){
+
         chimneys = new QueueList<>();
 
         Chimney cn;
+        /**
+         * Hàm này để lấy toạ độ in của các cặp ống khói rồi chuyển vào trong hàng đợi QueueList<>
+         * deltaY được biến số ngẫu nhiên bởi hàm getRandom để thay đổi vị trí của các cột khói.
+         */
 
         for(int i = 0; i< SIZE/2;i++){
 
@@ -72,9 +72,18 @@ public class ChimneyGroup {
     }
 
     public void Update() {
+        /**
+         * Đây là vòng lặp để xét vận tốc của những cái cột ống khói bằng hàm Update trong class Chimney
+         */
         for (int i = 0; i < SIZE; i++) {
             chimneys.get(i).Update();
         }
+        /**
+         * Vì độ rộng của cột bằng 74 nên khi hoành độ của cột(0) thứ nhất < -74 thì cột thứ nhất đã khuất phía sau màn hình game.
+         * Khi đó ta chuyển hình ảnh của cột thứ nhất ra phía sau cột thứ(4) thứ năm để sinh cột mới và dựa vào hoành độ ở địa điểm đó để vẽ hoàn thành cặp trụ.
+         * Đồng thời đặt hàm setIsBehindBird về 0 vì ở cột mới xây dựng con chim chưa vượt qua.
+         * Cuối cùng là đưa vào hàng chờ chimneys của class QueueList.
+         */
         if (chimneys.get(0).getPosX() < -74) {
 
             int deltaY = getRandomY();
@@ -96,6 +105,9 @@ public class ChimneyGroup {
     }
 
     public void Paint(Graphics2D g2) {
+        /**
+         * Vòng lặp để in ra ảnh cột ống khói . nếu chẵn thì in cột xuôi, nếu lẻ thì in cột ngược.
+         */
         for (int i = 0; i < SIZE; i++) {
             if (i % 2 == 0) {
                 g2.drawImage(chimneyImage, (int) chimneys.get(i).getPosX(), (int) chimneys.get(i).getPosY(), null);

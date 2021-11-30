@@ -8,23 +8,19 @@ public class Objects {
     public Objects(){
          posX = posY = w = h = 0;
     }
-    
+
+    /**
+     * hàm Object định nghĩa đối tượng lấy các toạ độ (x,y) , w, h;
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
     public Objects(float x, float y, float w, float h){
         this.posX = x;
         this.posY = y;
         this.w = w;
         this.h = h;
-    }
-    
-    public boolean isCollisionHappenWith(float x, float y){
-        if(x > posX && x < posX + w && y > posY && y < posY + h) 
-            return true;
-        return false;
-    }
-    public boolean isCollisionHappenWith(float x, float y, float w, float h){
-        if(x < posX + this.w && x + w > posX && y < posY + this.h && h + y > posY)
-            return true;
-        return false;
     }
     public void setPos(float x, float y){
         posX = x;
@@ -42,16 +38,7 @@ public class Objects {
     public float getPosY(){
         return posY;
     }
-    public float getW(){
-        return w;
-    }
     public float getH(){
         return h;
-    }
-    public void increasePosX(float m){
-        posX+=m;
-    }
-    public void increasePosY(float m){
-        posY+=m;
     }
 }
